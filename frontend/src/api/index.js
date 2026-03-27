@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-// 创建axios实例
+// 创建 axios 实例
 const service = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001',
-  timeout: 300000, // 5分钟超时（本体生成可能需要较长时间）
+  timeout: 300000, // 5 分钟超时（本体生成可能需要较长时间）
   headers: {
     'Content-Type': 'application/json'
   }
@@ -25,7 +25,7 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     
-    // 如果返回的状态码不是success，则抛出错误
+    // 如果返回的状态码不是 success，则抛出错误
     if (!res.success && res.success !== undefined) {
       console.error('API Error:', res.error || res.message || 'Unknown error')
       return Promise.reject(new Error(res.error || res.message || 'Error'))
